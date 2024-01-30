@@ -1,0 +1,35 @@
+﻿@model PdfDocxFileConvertToBase64.Models.FileUploadModel
+
+<html>
+<head>
+    <title>File Upload</title>
+</head>
+<body>
+    @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="file" name="File" />
+        <input type="submit" value="Upload and Process" />
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Base64String))
+    {
+        <div>
+            <h4>Base64 String:</h4>
+            <p>@ViewBag.Base64String</p>
+        </div>
+    }
+</body>
+</html>
+
+
+@if (ViewBag.Success != null && ViewBag.Success)
+{
+    <script>
+        $(document).ready(function () {
+            alert('File saved successfully!');
+        });
+    </script>
+}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
